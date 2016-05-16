@@ -6,6 +6,7 @@ main: conv train_test_set word_tokenize char_tokenize
 conv:
 	cut -f1 conv.txt > conv.src.txt
 	cut -f2 conv.txt > conv.dst.txt
+	cat conv.src.txt conv.dst.txt > sent.txt
 
 train_test_set:
 	python train_test_corpus.py -p ${TEST_PERC} conv.txt conv.train.txt conv.test.txt
@@ -52,6 +53,7 @@ char_tokenize:
 
 
 clean:
+	rm sent.txt
 	rm conv.{src,dst}.txt conv.{train,test}.txt conv.train.{src,dst}.txt conv.test.{src,dst}.txt sent.{train,test}.txt
 	rm conv.word.txt conv.word.{src,dst}.txt conv.word.{train,test}.txt conv.word.train.{src,dst}.txt conv.word.test.{src,dst}.txt sent.word.{train,test}.txt sent.word.txt
 	rm conv.char.txt conv.char.{src,dst}.txt conv.char.{train,test}.txt conv.char.train.{src,dst}.txt conv.char.test.{src,dst}.txt sent.char.{train,test}.txt sent.char.txt
